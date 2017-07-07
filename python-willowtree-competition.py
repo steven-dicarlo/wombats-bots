@@ -28,7 +28,7 @@ def wombat(state, time_left):
     				return 'left'
     			if currentDirection == 'right':
     				return 'down'
-	else:
+	else: 
 		return currentDirection
 		
     
@@ -39,18 +39,18 @@ def wombat(state, time_left):
     if 'direction' not in state:
         state['direction'] = "right"
     
-    index = random.randint(2,3)
+    index = random.randint(0,3)
     action = availableActions[index]
     
-    if state['global-coords'][0] == (state['global-dimensions'][0] - 1) and state['direction'] == "right":
-        action = availableActions[0]
+   # if state['global-coords'][0] == (state['global-dimensions'][0] - 1) and state['direction'] == "right":
+     #   action = availableActions[3]
         
-    state['direction'] = updateFacingDirection(state['direction'], turnRightAction)
+    state['direction'] = updateFacingDirection(state['direction'], action)
     return {
         'command': {
             'action': action['action'],
             'metadata': action['metadata']
         },
-        'state': state
+        'state': state['direction']
     }
 
