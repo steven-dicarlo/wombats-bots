@@ -30,7 +30,18 @@ def wombat(state, time_left):
     				return 'down'
 	else: 
 		return currentDirection
-		
+    def blockType(x, y):
+	return state['arena'][x][y]['contents']['type']
+	
+    def woodBlockInFront (currentDirection):
+	if currentDirection == 'up':
+		return (blockType(3,2) == 'wood-barrier')
+	if currentDirection == 'left':
+		return (blockType(2,3) == 'wood-barrier')
+	if currentDirection == 'down':
+		return (blockType(3,4) == 'wood-barrier')
+	if currentDirection == 'right':
+		return (blockType(4,3) == 'wood-barrier')
     
     import random
     theAction = ""
