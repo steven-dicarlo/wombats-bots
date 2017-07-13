@@ -42,13 +42,26 @@ def wombat(state, time_left):
 		return (blockType(3,4) == 'wood-barrier')
 	if currentDirection == 'right':
 		return (blockType(4,3) == 'wood-barrier')
-    
+	
+    def facingEdge(currentDirection):
+	if currentDirection == 'up':
+		state['global-coords'][1] == 0
+	if currentDirection == 'left':
+		state['global-coords'][0] == 0
+	if currentDirection == 'down':
+		state['global-coords'][1] == (state['global-dimensions'][1] - 1)
+	if currentDirection == 'right':
+		state['global-coords'][0] == (state['global-dimensions'][0] - 1)
+	
     import random
     theAction = ""
     availableActions = [turnRightAction, turnLeftAction, moveAction, shootAction]
     
-    if 'direction' not in state:
+    if 'saved-state' not in state:
         state['direction'] = "right"
+	currentDirection = 'right'
+    else:
+	currentDirection = state['saved-state']['direction']
     
     index = random.randint(0,3)
     action = availableActions[index]
@@ -62,6 +75,6 @@ def wombat(state, time_left):
             'action': action['action'],
             'metadata': action['metadata']
         },
-        'state': state['direction']
+        'state': state
     }
 
